@@ -18,7 +18,10 @@ export default {
       'slate': '#e2e8f0',
       'red': '#fca5a5',
       'redhov': '#f87171'
-    }
+    },
+    screens: {
+      'hp': '300px',
+    },
   },
   },
   plugins: [],

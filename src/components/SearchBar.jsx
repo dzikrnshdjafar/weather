@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import WeatherInfo from './WeatherInfo'
+import SearchIcon from '../assets/search.svg'
+import WeatherInfo from './WeatherInfo';
 
-const API_KEY = 'eebfd299e8b0e82fef9b31334ec43b57';
+const API_KEY = import.meta.env.VITE_APIKEY_OWM;
 
-const SearchBar = () => {
+const SearchBar = ({ setWeatherCondition }) => {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState(null);
 
@@ -16,37 +17,37 @@ const SearchBar = () => {
         );
         const data = await response.json();
         if (response.ok) {
-            setWeather(data); 
-          } else {
-            window.alert(`City ${city} not found Please enter a valid city.`);
-          }
-        } catch (error) {
-          console.error('Error fetching weather data:', error);
-          window.alert('Failed to fetch weather data. Please try again later.');
+          setWeather(data);
+          setWeatherCondition(data.weather[0].main);
+        } else {
+          window.alert(`City ${city} not found. Please enter a valid city.`);
         }
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+        window.alert('Failed to fetch weather data. Please try again later.');
+      }
     }
   };
 
   return (
-    <div>
-
-    <form onSubmit={handleSearch} className="flex text-xl">
-      <input
-        type="text"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        placeholder="Enter city..."
-        className="2xl:w-[50rem] xl:w-[40rem] lg:w-[30rem] w-full h-14 px-4 py-2 rounded-l-xl outline-none"
+    <div className="w-full">
+      <form onSubmit={handleSearch} className="flex text-xl">
+        <input
+          type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          placeholder="Enter city..."
+          className="text-neutral w-full h-14 px-4 py-2 rounded-l-2xl outline-none bg-slate"
         />
-      <button
-        type="submit"
-        className="px-4 py-2 bg-blue-500 text-white rounded-r-xl hover:bg-blue-600"
+        <button
+          type="submit"
+          className="px-4 py-2 bg-slate text-neutral rounded-r-2xl"
         >
-        Search
-      </button>
-    </form>
-<WeatherInfo weather={weather} />
-        </div>
+          <img src={SearchIcon} alt="" className='w-5 h-5'/>
+        </button>
+      </form>
+      <WeatherInfo weather={weather} />
+    </div>
   );
 };
 
