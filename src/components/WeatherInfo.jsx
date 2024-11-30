@@ -17,14 +17,14 @@ const WeatherInfo = ({ weather}) => {
   const roundTemperature = (temp) => Math.round(temp);
 
   return (
-    <div className="mt-8 flex justify-center">
+    <div className="mt-8 flex justify-center w-11/12">
       <div className="shadow-lg rounded-xl p-6 w-full">
-          <div className='flex gap-20'>
+          <div className='flex justify-between xl:w-full hp:w-11/12'>
         <div className="flex items-center mb-6">
           <img src={marker} alt="Marker" className="w-6 h-6 mr-1" />
           <h2 className="text-2xl font-bold">{weather.name}</h2>
         </div>
-            <p>{formatDate(currentDate)}</p>
+            <p className='w-1/12'>{formatDate(currentDate)}</p>
           </div>
         <div className='p-12 flex items-center justify-center'>
           <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt="" className="w-20 h-20 mr-1"/>

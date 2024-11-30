@@ -45,6 +45,8 @@ const Weather = () => {
       : 
       (<WeatherInfo weather={weather}/>)
       }
+      {/* <Loading/> */}
+      
     </div>
   </div>
 );
