@@ -4,7 +4,7 @@ import humidity from '../assets/humidity.svg';
 import wind from '../assets/wind.svg';
 
 
-const WeatherInfo = ({ weather }) => {
+const WeatherInfo = ({ weather}) => {
   if (!weather) return null;
 
   const formatDate = (date) => {

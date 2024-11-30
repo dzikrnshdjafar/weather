@@ -4,11 +4,11 @@ import WeatherInfo from './WeatherInfo';
 
 const API_KEY = import.meta.env.VITE_APIKEY_OWM;
 
-const SearchBar = ({ setWeatherCondition }) => {
+const SearchBar = ({ setWeatherCondition, setWeather, setLoading }) => {
   const [city, setCity] = useState('');
-  const [weather, setWeather] = useState(null);
 
   const handleSearch = async (e) => {
+    setLoading(true)
     e.preventDefault();
     if (city !== '') {
       try {
@@ -25,6 +25,8 @@ const SearchBar = ({ setWeatherCondition }) => {
       } catch (error) {
         console.error('Error fetching weather data:', error);
         window.alert('Failed to fetch weather data. Please try again later.');
+      } finally {
+        setLoading(false)
       }
     }
   };
@@ -46,7 +48,6 @@ const SearchBar = ({ setWeatherCondition }) => {
           <img src={SearchIcon} alt="" className='w-5 h-5'/>
         </button>
       </form>
-      <WeatherInfo weather={weather} />
     </div>
   );
 };
